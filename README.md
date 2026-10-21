@@ -1,390 +1,230 @@
 # 📊 Sistema de Vendas - ERP Completo
 
-Sistema de gestão comercial (ERP) desenvolvido em Python com interface gráfica Tkinter e banco de dados SQLite. Ideal para pequenos e médios negócios que precisam controlar clientes, produtos, compras, vendas, pagamentos e movimentações de estoque.
+Sistema de gestão comercial feito em **Python** com interface gráfica **Tkinter** e banco de dados **SQLite**. Roda direto no seu computador, sem precisar de internet, servidor ou instalar nada além do Python.
+
+Ideal para pequenos negócios que vendem produtos e querem controlar clientes, estoque, compras, vendas, pagamentos e devoluções num só lugar.
 
 ---
 
-## 📋 Índice
+## 🎯 O que o sistema faz
 
-- [Visão Geral](#visão-geral)
-- [Funcionalidades](#funcionalidades)
-- [Requisitos](#requisitos)
-- [Instalação](#instalação)
-- [Como Usar](#como-usar)
-- [Estrutura do Banco de Dados](#estrutura-do-banco-de-dados)
-- [Lógica de Negócio](#lógica-de-negócio)
-- [Personalização](#personalização)
-- [Solução de Problemas](#solução-de-problemas)
-- [Licença](#licença)
-
----
-
-## 🎯 Visão Geral
-
-O **Sistema de Vendas** é uma aplicação desktop completa que oferece:
-
-- **Dashboard analítico** com indicadores financeiros em tempo real
-- **Gestão de clientes** com ficha financeira detalhada
-- **Controle de produtos** com categorização e estoque
-- **Registro de compras** com rateio automático de frete
-- **Sistema de vendas** com cálculo de lucro por item
-- **Controle de pagamentos** (parciais e totais)
-- **Gestão de retiradas/devoluções** com impacto no estoque
-
----
-
-## ✨ Funcionalidades
+O sistema é dividido em **7 abas**, cada uma cuidando de uma parte do negócio:
 
 ### 📈 Dashboard
-- **9 indicadores principais:**
-  - Total Faturado
-  - Total Recebido
-  - A Receber
-  - Lucro Realizado
-  - Lucro Esperado
-  - Total de Vendas
-  - Ticket Médio
-  - Quantidade de Pedidos
-  - 💰 Saldo em Conta
-- Filtro por **mês/ano**
-- Ranking dos **10 produtos mais vendidos** por quantidade e faturamento
+Tela inicial com os números do negócio em tempo real:
+- Total faturado, recebido e a receber
+- Lucro realizado e lucro esperado
+- Ticket médio, quantidade de pedidos e total de vendas
+- **Saldo em conta** (quanto entrou menos quanto saiu)
+- Ranking dos produtos mais vendidos
+
+Você pode filtrar tudo por **mês e ano**.
 
 ### 👥 Clientes
-- Cadastro completo (nome, telefone, observações)
-- Pesquisa em tempo real
-- Edição e exclusão com validação
-- **Ficha Financeira** com:
-  - Resumo de compras, pagamentos e pendências
-  - Lista de pedidos com status (Aberto/Parcial/Pago)
-  - Detalhamento de itens por pedido
-  - Pagamentos por pedido
-  - Histórico completo de pagamentos
-  - Filtro por período
-  - Exclusão de vendas e pagamentos diretamente da ficha
+Cadastro de clientes com nome, telefone e observações. Cada cliente tem uma **Ficha Financeira** que mostra:
+- Tudo que ele já comprou
+- Quanto já pagou e quanto ainda deve
+- Histórico completo de pedidos e pagamentos
+- Possibilidade de excluir vendas ou pagamentos direto da ficha
 
 ### 📦 Produtos
-- Cadastro com nome, cor, preço padrão e categoria
-- Controle de estoque automático
-- Pesquisa e edição
-- Categorização para organização
+Cadastro de produtos com nome, cor, preço padrão e categoria. O **estoque é atualizado automaticamente** conforme você registra compras, vendas e devoluções — não precisa mexer nele na mão.
 
 ### 🛒 Compras
-- Registro com fornecedor, data e frete
-- **Rateio automático de frete** proporcional ao valor de cada item
-- Cálculo de custo unitário real (produto + frete)
-- Atualização automática de estoque
-- Edição com reversão e reaplicação de estoque
-- Exclusão com reversão de estoque
+Registro do que você compra dos fornecedores. O sistema:
+- Calcula o **custo real de cada produto** (valor pago + parte do frete)
+- Rateia o frete automaticamente entre os itens
+- Soma tudo ao estoque
+- Permite editar ou excluir uma compra (revertendo o estoque corretamente)
 
 ### 💵 Vendas
-- Seleção de cliente e produtos
-- Verificação de **estoque disponível** antes de vender
-- Exibição de **último custo** e **preço padrão**
-- Cálculo automático de lucro por item
-- Desconto por venda
-- Atualização automática de estoque
-- Edição com reversão de estoque e pagamentos
-- Status automático: Aberto → Parcial → Pago
+Registro do que você vende. O sistema:
+- Avisa se o estoque é suficiente antes de fechar a venda
+- Mostra o **último custo** do produto e o **preço sugerido**
+- Calcula o **lucro de cada item** e da venda inteira
+- Aceita desconto
+- Dá baixa automática no estoque
 
 ### 💳 Pagamentos
-- Registro de pagamentos por venda
-- Múltiplas formas: Dinheiro, Pix, Débito, Crédito, Transferência
-- Atualização automática do status da venda
-- Suporte a pagamentos parciais
+Registro dos pagamentos recebidos. Aceita:
+- Dinheiro, Pix, Cartão de Débito, Cartão de Crédito ou Transferência
+- Pagamentos **parciais** (o cliente paga um pouco agora e o resto depois)
+- O status da venda muda sozinho: **Aberto → Parcial → Pago**
 
 ### 🔄 Retiradas
-- **5 tipos de movimentação:**
-  - Devolução de Cliente
-  - Logística Reversa
-  - Perda/Avaria
-  - Custo de Envio
-  - Outros
-- Controle de impacto no estoque (aumenta/diminui/nenhum)
-- Registro de valores de custo, reembolso e frete
-- Edição com reversão automática de estoque
-- Exclusão com reversão de estoque
+Registro de movimentações que não são compra nem venda, como:
+- Devolução de cliente
+- Logística reversa
+- Perda ou avaria
+- Custo de envio
+- Outros
+
+Você escolhe se a operação **aumenta, diminui ou não mexe** no estoque.
 
 ---
 
-## ⚙️ Requisitos
+## 🔧 Como funciona por dentro
 
-- **Python 3.8+**
-- **Tkinter** (geralmente incluso no Python)
-- **SQLite3** (nativo do Python)
-- Sistema operacional: Windows, Linux ou macOS
+### Cálculo de custo com frete
+Quando você compra vários produtos de uma vez e paga um frete único, o sistema distribui o frete proporcionalmente ao valor de cada item:
 
-### Dependências
-Nenhuma dependência externa necessária! O sistema usa apenas bibliotecas padrão do Python:
-- `sqlite3`
-- `os`
-- `tkinter`
-- `datetime`
-- `calendar`
-
----
-
-## 🚀 Instalação
-
-### 1. Verificar Python
-```bash
-python --version
+```
+frete do item = frete total × (valor do item ÷ valor total da compra)
+custo unitário = (valor do item + frete do item) ÷ quantidade
 ```
 
-### 2. Verificar Tkinter
+### Cálculo de lucro
+```
+lucro do item = (preço de venda − custo unitário) × quantidade
+```
+
+### Saldo em conta (no dashboard)
+```
+saldo = tudo que foi pago pelos clientes
+      − compras feitas
+      − custos de frete das retiradas
+      − reembolsos a clientes
+```
+
+---
+
+## 🚀 Como rodar
+
+### O que você precisa
+- **Python 3.8 ou superior** instalado
+- **Tkinter** (já vem com o Python na maioria dos sistemas)
+
+### Passo a passo
+
+**1. Baixe o projeto**
+```bash
+git clone https://github.com/SEU-USUARIO/sistema-vendas.git
+cd sistema-vendas
+```
+
+**2. Confira se o Tkinter está disponível**
 ```bash
 python -c "import tkinter; print('Tkinter OK')"
 ```
 
-Se não tiver Tkinter instalado:
+Se der erro:
+| Sistema | Instalar com |
+|---------|--------------|
+| Ubuntu / Debian | `sudo apt-get install python3-tk` |
+| Fedora | `sudo dnf install python3-tkinter` |
+| macOS | `brew install python-tk` |
+| Windows | Já vem instalado |
 
-**Ubuntu/Debian:**
-```bash
-sudo apt-get install python3-tk
-```
+**3. Ajuste o caminho do banco de dados**
 
-**Fedora:**
-```bash
-sudo dnf install python3-tkinter
-```
-
-### 3. Baixar o projeto
-Salve o arquivo `sistema_vendas.py` em uma pasta de sua preferência.
-
-### 4. Configurar o caminho do banco de dados
-
-**⚠️ IMPORTANTE:** No código, localize a linha:
+Abra `sistema_vendas.py` e procure esta linha perto do topo:
 
 ```python
 pasta_sistema = r"C:\Users\gneife\Desktop\PROJETOS\SISTEMA DE VENDAS"
 ```
 
-E altere para um caminho válido no seu computador. Exemplos:
+Troque por uma pasta qualquer no seu computador:
 
 ```python
 # Windows
 pasta_sistema = r"C:\MeusProjetos\SistemaVendas"
 
-# Linux/Mac
+# Linux / Mac
 pasta_sistema = os.path.join(os.path.expanduser("~"), "SistemaVendas")
 ```
 
-### 5. Executar
+**4. Execute**
 ```bash
 python sistema_vendas.py
 ```
 
-O banco de dados `erp_completo.db` será criado automaticamente na primeira execução.
+Na primeira execução o arquivo `erp_completo.db` é criado automaticamente nessa pasta. É ele que guarda todos os seus dados.
 
 ---
 
-## 📖 Como Usar
+## 📖 Primeiros passos dentro do sistema
 
-### Fluxo Recomendado
+Siga esta ordem para começar:
 
-1. **Cadastre Clientes** → aba *Clientes*
-2. **Cadastre Produtos** → aba *Produtos*
-3. **Registre Compras** → aba *Compras* (atualiza estoque e custo)
-4. **Registre Vendas** → aba *Vendas* (baixa estoque)
-5. **Registre Pagamentos** → aba *Pagamentos*
-6. **Acompanhe no Dashboard** → aba *Dashboard*
-
-### Dicas de Uso
-
-- 🔍 Use a **barra de pesquisa** nas abas de clientes e produtos para localizar rapidamente
-- 🖱️ **Clique duas vezes** ou selecione um item para editar
-- 💡 Na aba **Vendas**, ao selecionar um produto, o sistema mostra:
-  - Estoque disponível
-  - Último custo de compra
-  - Preço padrão sugerido
-- 💰 O **Saldo em Conta** no dashboard considera:
-  - (+) Todos os pagamentos recebidos
-  - (-) Todas as compras realizadas
-  - (-) Custos de frete das retiradas
-  - (-) Reembolsos a clientes
+1. **Cadastre seus clientes** → aba *Clientes*
+2. **Cadastre seus produtos** → aba *Produtos*
+3. **Registre uma compra** → aba *Compras* (o estoque sobe)
+4. **Registre uma venda** → aba *Vendas* (o estoque desce)
+5. **Registre o pagamento** → aba *Pagamentos*
+6. **Acompanhe tudo no Dashboard**
 
 ---
 
-## 🗄️ Estrutura do Banco de Dados
+## ⚠️ Coisas importantes de saber
 
-| Tabela | Descrição |
-|--------|-----------|
-| `clientes` | Cadastro de clientes |
-| `produtos` | Catálogo de produtos com estoque |
-| `compras` | Cabeçalho das compras |
-| `compra_itens` | Itens da compra com frete rateado |
-| `vendas` | Cabeçalho das vendas |
-| `venda_itens` | Itens vendidos com custo e lucro |
-| `pagamentos` | Pagamentos vinculados a vendas |
-| `retiradas` | Movimentações especiais (devoluções, perdas, etc.) |
+- **Não tem login nem senha.** O sistema é feito para uso pessoal, num computador só seu.
+- **O banco de dados não é criptografado.** É um arquivo `.db` normal — trate como documento confidencial.
+- **Faça backup.** Copie o `erp_completo.db` de vez em quando para um pendrive ou nuvem. Se ele se perder, os dados vão junto.
+- **Não apague o arquivo `.db`** pensando que é lixo. É ele que guarda tudo.
 
-### Relacionamentos
-```
-clientes ──┬── vendas ──┬── venda_itens ── produtos
-           │            └── pagamentos
-           └── retiradas
-           
-produtos ──┬── compra_itens ── compras
-           ├── venda_itens
-           └── retiradas
+### Backup rápido
+```bash
+# Linux / Mac
+cp erp_completo.db backup_$(date +%Y%m%d).db
+
+# Windows (PowerShell)
+Copy-Item erp_completo.db "backup_$(Get-Date -Format yyyyMMdd).db"
 ```
 
 ---
 
-## 🧮 Lógica de Negócio
+## 🎨 Personalização rápida
 
-### Cálculo de Custo com Frete
-```
-frete_item = frete_total × (valor_total_item / valor_total_compra)
-custo_unitario = (valor_total_item + frete_item) / quantidade
-```
-
-### Cálculo de Lucro
-```
-lucro_item = (preco_venda - custo_unitario) × quantidade
-lucro_venda = total_final - soma_custos
-```
-
-### Lucro Realizado (Dashboard)
-Considera apenas a **proporção paga** de cada venda:
-```
-proporcao_paga = total_pago / total_venda
-lucro_realizado += lucro_venda × proporcao_paga
-```
-
-### Saldo em Conta
-```
-saldo = Σ pagamentos - (Σ compras + Σ custos_frete_retiradas + Σ reembolsos)
-```
-
-### Status de Venda
-- **Aberto**: nenhum pagamento
-- **Parcial**: pagamento > 0 mas < total
-- **Pago**: pagamento ≥ total
-
----
-
-## 🎨 Personalização
-
-### Alterar cores do tema
-No método `__init__` da classe `ERP`, modifique:
+**Mudar a cor do tema** (no método `__init__`):
 ```python
-self.root.configure(bg="#1e1e1e")  # Fundo escuro
+self.root.configure(bg="#1e1e1e")  # fundo escuro
 ```
 
-### Alterar tamanho da janela
+**Mudar o tamanho da janela:**
 ```python
 largura = 1200
 altura = 650
 ```
 
-### Alterar caminho do banco de dados
-```python
-pasta_sistema = r"SEU_CAMINHO_AQUI"
-```
-
-### Adicionar novas formas de pagamento
-Na aba *Pagamentos*, localize:
+**Adicionar formas de pagamento** (na aba *Pagamentos*):
 ```python
 self.pag_forma = ttk.Combobox(frame_add, values=[
     "Dinheiro", "Pix", "Cartão Débito", "Cartão Crédito", "Transferência"
-], width=15)
+])
 ```
 
 ---
 
-## 🐛 Solução de Problemas
+## 🗄️ Estrutura dos dados
 
-### Erro: "No module named 'tkinter'"
-```bash
-# Ubuntu/Debian
-sudo apt-get install python3-tk
+O sistema guarda tudo em 8 tabelas:
 
-# Fedora
-sudo dnf install python3-tkinter
-
-# Mac (com Homebrew)
-brew install python-tk
-```
-
-### Erro: "unable to open database file"
-- Verifique se o caminho em `pasta_sistema` existe
-- Verifique permissões de escrita na pasta
-- Em Windows, evite caminhos com caracteres especiais
-
-### Erro: "database is locked"
-- Feche outras instâncias do sistema
-- Verifique se não há outro programa acessando o `.db`
-
-### Interface não abre
-- Verifique se o Python tem suporte a GUI (ambiente gráfico disponível)
-- Em servidores remotos, use VNC ou X11 forwarding
-
-### Estoque incorreto
-- Verifique se a compra foi registrada corretamente
-- Use a ficha do produto para auditar movimentações
-- Exclua e recadastre a operação problemática
+| Tabela | O que guarda |
+|--------|--------------|
+| `clientes` | Cadastro de clientes |
+| `produtos` | Catálogo com estoque e preço |
+| `compras` / `compra_itens` | Compras e itens com frete rateado |
+| `vendas` / `venda_itens` | Vendas e itens com custo e lucro |
+| `pagamentos` | Cada pagamento recebido |
+| `retiradas` | Devoluções, perdas e custos de envio |
 
 ---
 
-## 📝 Notas Técnicas
+## 🐛 Problemas comuns
 
-### Performance
-- O sistema usa **transações** (`BEGIN TRANSACTION`) para operações críticas
-- **Rollback automático** em caso de erro
-- Índices implícitos nas chaves primárias e estrangeiras
-
-### Segurança
-- ⚠️ **Não há autenticação de usuários** — recomendado apenas para uso pessoal ou em rede confiável
-- ⚠️ O banco de dados **não é criptografado**
-- ⚠️ Faça **backups regulares** do arquivo `erp_completo.db`
-
-### Backup
-Copie o arquivo `erp_completo.db` para um local seguro periodicamente:
-```bash
-# Exemplo de backup manual
-cp erp_completo.db backup_$(date +%Y%m%d).db
-```
-
----
-
-## 🔮 Melhorias Futuras (Sugestões)
-
-- [ ] Sistema de login e permissões
-- [ ] Relatórios em PDF
-- [ ] Exportação para Excel
-- [ ] Backup automático
-- [ ] Gráficos no dashboard (matplotlib)
-- [ ] Cadastro de fornecedores
-- [ ] Múltiplos usuários em rede (PostgreSQL/MySQL)
-- [ ] Emissão de recibos e notas
-- [ ] Código de barras
+| Problema | Solução |
+|----------|---------|
+| `No module named 'tkinter'` | Instale o Tkinter conforme a tabela acima |
+| `unable to open database file` | Ajuste o caminho `pasta_sistema` no código |
+| `database is locked` | Feche outras janelas do sistema abertas ao mesmo tempo |
+| A janela não abre | O Python precisa de ambiente gráfico (não funciona em servidor sem tela) |
 
 ---
 
 ## 📄 Licença
 
-Este projeto é fornecido **"como está"**, sem garantias. Uso livre para fins pessoais e comerciais.
+Livre para uso pessoal e comercial. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
-## 👨‍💻 Autor
-
-Desenvolvido como sistema de gestão completo para pequenos negócios.
-
-**Contribuições são bem-vindas!** Sinta-se livre para:
-- Reportar bugs
-- Sugerir melhorias
-- Enviar pull requests
-
----
-
-## 📞 Suporte
-
-Para dúvidas técnicas:
-1. Verifique a seção [Solução de Problemas](#solução-de-problemas)
-2. Revise a [Lógica de Negócio](#lógica-de-negócio)
-3. Consulte o código-fonte (bem comentado)
-
----
-
-**⭐ Se este projeto te ajudou, considere dar uma estrela!**
+**Se este projeto te ajudou, deixa uma ⭐ no repositório!**
